@@ -1,5 +1,13 @@
 import React from 'react';
+import Palette from '../components/palette';
 
-const DashboardPage = () => <div>This is from the dashboard page</div>;
+import seedColors from '../constants/seedColors';
+
+const DashboardPage = () => (
+  <div>
+    <p>This is from the dashboard page</p>
+    <Palette {...seedColors[5]} />
+  </div>
+);
 
 export default DashboardPage;
