@@ -1,1 +1,1 @@
-Boilerplate Webpack React
+React Color App
