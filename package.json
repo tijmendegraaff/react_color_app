@@ -8,6 +8,7 @@
     "build:prod": "webpack --config webpack/webpack.prod.js --progress"
   },
   "dependencies": {
+    "chroma-js": "^2.0.3",
     "normalize.css": "^8.0.1",
     "react": "^16.8.6",
     "react-copy-to-clipboard": "^5.0.1",
