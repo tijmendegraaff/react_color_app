@@ -1,24 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import PaletteList from '../components/PaletteList';
 
 import seedColors from '../constants/seedColors';
-import generatePalette from '../helpers/colorHelpers';
+// import generatePalette from '../helpers/colorHelpers';
 
-const DashboardPage = () => {
-  const palettes = seedColors.map(color => generatePalette(color));
-
-  const paletteLinks = palettes.map(palette => (
-    <Link key={palette.id} to={`/palette/${palette.id}`}>
-      {palette.paletteName}
-    </Link>
-  ));
-
-  return (
-    <div>
-      <p>palette list goes here</p>
-      {paletteLinks}
-    </div>
-  );
-};
-
+const DashboardPage = () => (
+  <div>
+    <PaletteList palettes={seedColors} />
+  </div>
+);
 export default DashboardPage;
