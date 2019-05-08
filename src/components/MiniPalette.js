@@ -1,13 +1,22 @@
 import React from 'react';
 
-const MiniPalette = ({ paletteName, emoji }) => (
-  <div className="mini-palette-container">
-    <div className="mini-palette-colors" />
-    <h5 className="mini-palette-title">
-      {paletteName}
-      <span className="mini-palette-emoji">{emoji}</span>
-    </h5>
-  </div>
-);
+const MiniPalette = ({ paletteName, emoji, colors }) => {
+  const miniColorBoxes = colors.map(color => (
+    <div
+      key={color.name}
+      className="mini-palette-color-box"
+      style={{ backgroundColor: color.color }}
+    />
+  ));
+  return (
+    <div className="mini-palette-container">
+      <div className="mini-palette-colors">{miniColorBoxes}</div>
+      <h5 className="mini-palette-title">
+        {paletteName}
+        <span className="mini-palette-emoji">{emoji}</span>
+      </h5>
+    </div>
+  );
+};
 
 export default MiniPalette;
