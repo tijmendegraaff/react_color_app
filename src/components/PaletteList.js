@@ -10,11 +10,17 @@ class PaletteList extends Component {
   render() {
     const { palettes } = this.props;
     return (
-      <div>
-        <h1>PaletteList component</h1>
-        {palettes.map(palette => (
-          <MiniPalette key={palette.id} {...palette} />
-        ))}
+      <div className="palette-list-wrapper">
+        <div className="palette-list-container">
+          <nav className="palette-list-nav">
+            <h1>React Colors</h1>
+          </nav>
+          <div className="palette-list-palettes-container">
+            {palettes.map(palette => (
+              <MiniPalette key={palette.id} {...palette} />
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
