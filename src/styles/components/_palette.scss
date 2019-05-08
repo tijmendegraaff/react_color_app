@@ -1,7 +1,9 @@
-.Palette {
+.palette {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.Palette-colors {
-  height: 90%;
+.palette-colors {
+  height: 90vh;
 }
