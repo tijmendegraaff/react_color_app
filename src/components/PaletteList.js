@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import MiniPalette from './MiniPalette';
 
 class PaletteList extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.navigateToPalette = this.navigateToPalette.bind(this);
+  }
+
+  navigateToPalette(id) {
+    const {
+      history: { push },
+    } = this.props;
+    push(`/palette/${id}`);
   }
 
   render() {
@@ -17,7 +25,11 @@ class PaletteList extends Component {
           </nav>
           <div className="palette-list-palettes-container">
             {palettes.map(palette => (
-              <MiniPalette key={palette.id} {...palette} />
+              <MiniPalette
+                key={palette.id}
+                {...palette}
+                handleClick={() => this.navigateToPalette(palette.id)}
+              />
             ))}
           </div>
         </div>
@@ -26,4 +38,4 @@ class PaletteList extends Component {
   }
 }
 
-export default PaletteList;
+export default withRouter(PaletteList);

@@ -1,6 +1,8 @@
 import React from 'react';
 
-const MiniPalette = ({ paletteName, emoji, colors }) => {
+const MiniPalette = ({
+  paletteName, emoji, colors, handleClick,
+}) => {
   const miniColorBoxes = colors.map(color => (
     <div
       key={color.name}
@@ -9,7 +11,7 @@ const MiniPalette = ({ paletteName, emoji, colors }) => {
     />
   ));
   return (
-    <div className="mini-palette-container">
+    <div className="mini-palette-container" onClick={handleClick} role="link">
       <div className="mini-palette-colors">{miniColorBoxes}</div>
       <h5 className="mini-palette-title">
         {paletteName}
