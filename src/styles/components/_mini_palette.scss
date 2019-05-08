@@ -1,0 +1,30 @@
+.mini-palette-container {
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.mini-palette-colors {
+  background-color: $light-grey;
+}
+
+.mini-palette-title {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  align-items: center;
+  padding-top: 0.5rem;
+  font-size: 1rem;
+  position: relative;
+}
+
+.mini-palette-emoji {
+  margin-left: 0.5rem;
+  font-size: 1.5rem;
+}
