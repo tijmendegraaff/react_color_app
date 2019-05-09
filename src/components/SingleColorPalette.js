@@ -7,14 +7,14 @@ class SingleColorPalette extends Component {
     this._shades = this.gatherShades(palette, colorId);
   }
 
-  gatherShades(palette, colorFilterBy) {
+  gatherShades = (palette, colorFilterBy) => {
     let shades = [];
     const allColors = palette.colors;
-    for (const key in allColors) {
+    Object.keys(allColors).forEach((key) => {
       shades = shades.concat(allColors[key].filter(color => color.id === colorFilterBy));
-    }
+    });
     return shades.slice(1);
-  }
+  };
 
   render() {
     return (
