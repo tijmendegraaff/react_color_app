@@ -11,7 +11,13 @@ const MiniPalette = ({
     />
   ));
   return (
-    <div className="mini-palette-container" onClick={handleClick} role="link">
+    <div
+      className="mini-palette-container"
+      onClick={handleClick}
+      role="link"
+      tabIndex="0"
+      onKeyDown={handleClick}
+    >
       <div className="mini-palette-colors">{miniColorBoxes}</div>
       <h5 className="mini-palette-title">
         {paletteName}
