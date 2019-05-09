@@ -1,8 +1,9 @@
 import React from 'react';
+import SingleColorPalette from '../components/SingleColorPalette';
 
 const ColorPage = () => (
   <div>
-    <p>Color Page</p>
+    <SingleColorPalette />
   </div>
 );
 export default ColorPage;
