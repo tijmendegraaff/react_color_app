@@ -92,10 +92,17 @@ class NewPaletteForm extends React.Component {
   }
 
   // TODO need to check eslint
+
+  /*eslint-disable */
   componentDidMount() {
-    ValidatorForm.addValidationRule('isColorNameUnique', value => this.state.colors.every(({ name }) => name.toLowerCase() !== value.toLowerCase()));
-    ValidatorForm.addValidationRule('isColorUnique', () => this.state.colors.every(({ color }) => color !== this.state.currentColor));
+    ValidatorForm.addValidationRule('isColorNameUnique', value =>
+      this.state.colors.every(({ name }) => name.toLowerCase() !== value.toLowerCase()),
+    );
+    ValidatorForm.addValidationRule('isColorUnique', () =>
+      this.state.colors.every(({ color }) => color !== this.state.currentColor),
+    );
   }
+  /* eslint-enable */
 
   toggleDrawer() {
     const { open } = this.state;
