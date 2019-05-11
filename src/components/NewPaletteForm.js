@@ -73,21 +73,36 @@ const styles = theme => ({
 });
 
 class NewPaletteForm extends React.Component {
-  state = {
-    open: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: true,
+      currentColor: 'teal',
+      colors: ['purple', '#e15764'],
+    };
+    this.updateCurrentColor = this.updateCurrentColor.bind(this);
+    this.addNewColor = this.addNewColor.bind(this);
+    this.toggleDrawer = this.toggleDrawer.bind(this);
+  }
 
-  handleDrawerOpen = () => {
-    this.setState({ open: true });
-  };
+  toggleDrawer() {
+    const { open } = this.state;
+    this.setState({ open: !open });
+  }
 
-  handleDrawerClose = () => {
-    this.setState({ open: false });
-  };
+  updateCurrentColor(newColor) {
+    const currentColor = newColor.hex;
+    this.setState({ currentColor });
+  }
+
+  addNewColor() {
+    const { currentColor, colors } = this.state;
+    this.setState({ colors: [...colors, currentColor] });
+  }
 
   render() {
     const { classes } = this.props;
-    const { open } = this.state;
+    const { open, currentColor, colors } = this.state;
 
     return (
       <div className={classes.root}>
@@ -102,7 +117,7 @@ class NewPaletteForm extends React.Component {
             <IconButton
               color="inherit"
               aria-label="Open drawer"
-              onClick={this.handleDrawerOpen}
+              onClick={this.toggleDrawer}
               className={classNames(classes.menuButton, open && classes.hide)}
             >
               <MenuIcon />
@@ -122,7 +137,7 @@ class NewPaletteForm extends React.Component {
           }}
         >
           <div className={classes.drawerHeader}>
-            <IconButton onClick={this.handleDrawerClose}>
+            <IconButton onClick={this.toggleDrawer}>
               <ChevronLeftIcon />
             </IconButton>
           </div>
@@ -136,13 +151,13 @@ class NewPaletteForm extends React.Component {
               Random Color
             </Button>
           </div>
-          <ChromePicker
-            color="purple"
-            onChangeComplete={(newColor) => {
-              console.log(newColor);
-            }}
-          />
-          <Button variant="contained" color="primary">
+          <ChromePicker color={currentColor} onChangeComplete={this.updateCurrentColor} />
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ backgroundColor: currentColor }}
+            onClick={this.addNewColor}
+          >
             Add Color
           </Button>
         </Drawer>
@@ -152,6 +167,13 @@ class NewPaletteForm extends React.Component {
           })}
         >
           <div className={classes.drawerHeader} />
+          <ul>
+            {colors.map(color => (
+              <li style={{ backgroundColor: color }} key={color}>
+                {color}
+              </li>
+            ))}
+          </ul>
         </main>
       </div>
     );
