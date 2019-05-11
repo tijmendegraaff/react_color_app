@@ -3,7 +3,6 @@ import NewPaletteForm from '../components/NewPaletteForm';
 
 const NewPalettePage = () => (
   <div>
-    <p>new Palette page</p>
     <NewPaletteForm />
   </div>
 );
