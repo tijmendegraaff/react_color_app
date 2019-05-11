@@ -12,9 +12,10 @@ const styles = {
   },
 };
 
-const DraggableColorBox = ({ color, classes }) => (
-  <div key={color} style={{ backgroundColor: color }} className={classes.root}>
+const DraggableColorBox = ({ color, classes, name }) => (
+  <div style={{ backgroundColor: color }} className={classes.root}>
     {color}
+    <p>{name}</p>
   </div>
 );
 
