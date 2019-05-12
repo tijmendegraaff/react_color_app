@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -76,7 +76,7 @@ const styles = theme => ({
   },
 });
 
-class NewPaletteForm extends React.Component {
+class NewPaletteForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -89,6 +89,7 @@ class NewPaletteForm extends React.Component {
     this.addNewColor = this.addNewColor.bind(this);
     this.toggleDrawer = this.toggleDrawer.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   // TODO need to check eslint
@@ -124,17 +125,30 @@ class NewPaletteForm extends React.Component {
     this.setState({ newName: e.target.value });
   }
 
+  handleSubmit() {
+    const newName = 'New Test Palette';
+    const { savePalette, history } = this.props;
+    const { colors } = this.state;
+    const newPalette = {
+      paletteName: newName,
+      id: newName.toLowerCase().replace(/ /g, '-'),
+      colors,
+    };
+    savePalette(newPalette);
+    history.push('/');
+  }
+
   render() {
     const { classes } = this.props;
     const {
       open, currentColor, colors, newName,
     } = this.state;
-    console.log(this.state);
     return (
       <div className={classes.root}>
         <CssBaseline />
         <AppBar
           position="fixed"
+          color="default"
           className={classNames(classes.appBar, {
             [classes.appBarShift]: open,
           })}
@@ -151,6 +165,9 @@ class NewPaletteForm extends React.Component {
             <Typography variant="h6" color="inherit" noWrap>
               Persistent drawer
             </Typography>
+            <Button variant="contained" color="primary" onClick={this.handleSubmit}>
+              Save Palette
+            </Button>
           </Toolbar>
         </AppBar>
         <Drawer

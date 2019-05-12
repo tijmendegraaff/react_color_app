@@ -32,8 +32,8 @@ class colorBox extends Component {
         <div style={{ background }} className="color-box">
           <div style={{ background }} className={`copy-overlay ${copied && 'show'}`} />
           <div className={`copy-msg ${copied && 'show'}`}>
-            <h1 className={isLightColor && 'dark-text'}>Copied!</h1>
-            <p className={isLightColor && 'dark-text'}>{background}</p>
+            <h1 className={isLightColor ? 'dark-text' : undefined}>Copied!</h1>
+            <p className={isLightColor ? 'dark-text' : undefined}>{background}</p>
           </div>
           <div className="copy-container">
             <div className="box-content">
