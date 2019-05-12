@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,7 +14,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Button from '@material-ui/core/Button';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { ChromePicker } from 'react-color';
-import { arrayMove } from 'react-sortable-hoc';
+import arrayMove from 'array-move';
 import DraggableColorList from './DraggableColorList';
 
 const drawerWidth = 350;
@@ -77,14 +78,19 @@ const styles = theme => ({
 });
 
 class NewPaletteForm extends Component {
+  static defaultProps = {
+    maxColors: 20,
+  };
+
   constructor(props) {
     super(props);
+    const { palettes } = this.props;
     this.state = {
       open: true,
       currentColor: 'teal',
       newColorName: '',
       newPaletteName: '',
-      colors: [{ color: 'blue', name: 'blue' }],
+      colors: palettes[0].colors,
     };
     this.updateCurrentColor = this.updateCurrentColor.bind(this);
     this.addNewColor = this.addNewColor.bind(this);
@@ -93,6 +99,8 @@ class NewPaletteForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.deleteColor = this.deleteColor.bind(this);
     this.onSortEnd = this.onSortEnd.bind(this);
+    this.clearColors = this.clearColors.bind(this);
+    this.addRandomColor = this.addRandomColor.bind(this);
   }
 
   // TODO need to check eslint
@@ -141,6 +149,24 @@ class NewPaletteForm extends Component {
     });
   }
 
+  clearColors() {
+    this.setState({
+      colors: [],
+    });
+  }
+
+  // TODO make sure the random color is not in the state
+  addRandomColor() {
+    const { palettes } = this.props;
+    const { colors } = this.state;
+    const allColors = palettes.map(palette => palette.colors).flat();
+    const rand = Math.floor(Math.random() * allColors.length);
+    const randomColor = allColors[rand];
+    this.setState({
+      colors: [...colors, randomColor],
+    });
+  }
+
   toggleDrawer() {
     const { open } = this.state;
     this.setState({ open: !open });
@@ -159,10 +185,11 @@ class NewPaletteForm extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, maxColors } = this.props;
     const {
       open, currentColor, colors, newColorName, newPaletteName,
     } = this.state;
+    const paletteIsFull = colors.length >= maxColors;
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -197,6 +224,11 @@ class NewPaletteForm extends Component {
               <Button variant="contained" color="primary" type="submit">
                 Save Palette
               </Button>
+              <Link to="/">
+                <Button variant="contained" color="secondary">
+                  Go Back
+                </Button>
+              </Link>
             </ValidatorForm>
           </Toolbar>
         </AppBar>
@@ -217,10 +249,15 @@ class NewPaletteForm extends Component {
           <Divider />
           <Typography variant="h4">Design Your Palette</Typography>
           <div>
-            <Button variant="contained" color="secondary">
+            <Button variant="contained" color="secondary" onClick={this.clearColors}>
               Clear Palette
             </Button>
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              disabled={paletteIsFull}
+              color="primary"
+              onClick={this.addRandomColor}
+            >
               Random Color
             </Button>
           </div>
@@ -241,6 +278,7 @@ class NewPaletteForm extends Component {
               type="submit"
               variant="contained"
               color="primary"
+              disabled={paletteIsFull}
               style={{ backgroundColor: currentColor }}
             >
               Add Color
