@@ -91,6 +91,7 @@ class NewPaletteForm extends Component {
     this.toggleDrawer = this.toggleDrawer.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.deleteColor = this.deleteColor.bind(this);
   }
 
   // TODO need to check eslint
@@ -129,6 +130,13 @@ class NewPaletteForm extends Component {
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  deleteColor(colorName) {
+    const { colors } = this.state;
+    this.setState({
+      colors: colors.filter(color => color.name !== colorName),
+    });
   }
 
   handleSubmit() {
@@ -239,7 +247,12 @@ class NewPaletteForm extends Component {
         >
           <div className={classes.drawerHeader} />
           {colors.map(color => (
-            <DraggableColorBox key={color.color} color={color.color} name={color.name} />
+            <DraggableColorBox
+              key={color.name}
+              color={color.color}
+              name={color.name}
+              deleteColor={this.deleteColor}
+            />
           ))}
         </main>
       </div>
