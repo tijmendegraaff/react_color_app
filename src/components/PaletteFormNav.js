@@ -112,7 +112,14 @@ class PaletteFormNav extends Component {
             </Button>
           </div>
         </AppBar>
-        {formShowing && <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} />}
+        {formShowing && (
+          <PaletteMetaForm
+            open={formShowing}
+            palettes={palettes}
+            handleSubmit={handleSubmit}
+            toggleForm={this.toggleForm}
+          />
+        )}
       </div>
     );
   }
