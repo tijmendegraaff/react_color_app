@@ -23,6 +23,7 @@ const styles = theme => ({
     }),
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     height: '64px',
   },
   appBarShift: {
@@ -37,23 +38,41 @@ const styles = theme => ({
     marginLeft: 12,
     marginRight: 20,
   },
-  navButtons: {},
+  navButtons: {
+    marginRight: '1rem',
+    '& a': {
+      textDecoration: 'none',
+    },
+  },
+  button: {
+    margin: '0 0.5rem',
+  },
 });
 class PaletteFormNav extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      formShowing: false,
+    };
 
     this.handleChange = this.handleChange.bind(this);
+    this.toggleForm = this.toggleForm.bind(this);
   }
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  toggleForm() {
+    const { formShowing } = this.state;
+    this.setState({ formShowing: !formShowing });
+  }
+
   render() {
     const {
       open, classes, toggleDrawer, palettes, handleSubmit,
     } = this.props;
+    const { formShowing } = this.state;
     return (
       <div className={styles.root}>
         <CssBaseline />
@@ -78,14 +97,22 @@ class PaletteFormNav extends Component {
             </Typography>
           </Toolbar>
           <div className={classes.navButtons}>
-            <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} />
-            <Link to="/">
-              <Button variant="contained" color="secondary">
+            <Link to="/" className={classes.link}>
+              <Button variant="contained" color="secondary" className={classes.button}>
                 Go Back
               </Button>
             </Link>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={this.toggleForm}
+            >
+              Save
+            </Button>
           </div>
         </AppBar>
+        {formShowing && <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} />}
       </div>
     );
   }

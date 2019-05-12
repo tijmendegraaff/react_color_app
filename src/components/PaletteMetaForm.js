@@ -11,7 +11,7 @@ class PaletteMetaForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
+      open: true,
       newPaletteName: '',
     };
     this.toggleForm = this.toggleForm.bind(this);
@@ -42,41 +42,34 @@ class PaletteMetaForm extends Component {
     const { handleSubmit } = this.props;
     const { open, newPaletteName } = this.state;
     return (
-      <div>
-        <Button variant="outlined" color="primary" onClick={this.toggleForm}>
-          Open form dialog
-        </Button>
-        <Dialog open={open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-          <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+      <Dialog open={open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Choose a Palette Name</DialogTitle>
+        <ValidatorForm onSubmit={() => handleSubmit(newPaletteName)}>
           <DialogContent>
             <DialogContentText>
-              To subscribe to this website, please enter your email address here. We will send
-              updates occasionally.
+              Please enter a new for your new Palette. Make sure it&apos;s unique
             </DialogContentText>
-            <ValidatorForm onSubmit={() => handleSubmit(newPaletteName)}>
-              <TextValidator
-                value={newPaletteName}
-                name="newPaletteName"
-                label="Palette Name"
-                validators={['required', 'isPaletteNameUnique']}
-                errorMessages={['this field is required', 'name already used']}
-                onChange={this.handleChange}
-              />
-              <Button variant="contained" color="primary" type="submit">
-                Save Palette
-              </Button>
-            </ValidatorForm>
+            <TextValidator
+              value={newPaletteName}
+              name="newPaletteName"
+              label="Palette Name"
+              fullWidth
+              margin="normal"
+              validators={['required', 'isPaletteNameUnique']}
+              errorMessages={['this field is required', 'name already used']}
+              onChange={this.handleChange}
+            />
           </DialogContent>
           <DialogActions>
             <Button onClick={this.toggleForm} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.toggleForm} color="primary">
-              Subscribe
+            <Button variant="contained" color="primary" type="submit">
+              Save Palette
             </Button>
           </DialogActions>
-        </Dialog>
-      </div>
+        </ValidatorForm>
+      </Dialog>
     );
   }
 }
