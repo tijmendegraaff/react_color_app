@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -9,7 +10,35 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import drawerWidth from '../constants/cssConstants';
 
+const styles = theme => ({
+  root: {
+    display: 'flex',
+  },
+  appBar: {
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: '64px',
+  },
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  menuButton: {
+    marginLeft: 12,
+    marginRight: 20,
+  },
+  navButtons: {},
+});
 class PaletteFormNav extends Component {
   constructor(props) {
     super(props);
@@ -18,8 +47,8 @@ class PaletteFormNav extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
   }
-  // TODO need to check eslint
 
+  // TODO need to check eslint
   /*eslint-disable */
   componentDidMount() {
     ValidatorForm.addValidationRule('isPaletteNameUnique', value =>
@@ -40,7 +69,7 @@ class PaletteFormNav extends Component {
     } = this.props;
     const { newPaletteName } = this.state;
     return (
-      <>
+      <div className={styles.root}>
         <CssBaseline />
         <AppBar
           position="fixed"
@@ -59,8 +88,10 @@ class PaletteFormNav extends Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" noWrap>
-              Persistent drawer
+              Create a Palette
             </Typography>
+          </Toolbar>
+          <div className={classes.navButtons}>
             <ValidatorForm onSubmit={() => handleSubmit(newPaletteName)}>
               <TextValidator
                 value={newPaletteName}
@@ -73,17 +104,17 @@ class PaletteFormNav extends Component {
               <Button variant="contained" color="primary" type="submit">
                 Save Palette
               </Button>
-              <Link to="/">
-                <Button variant="contained" color="secondary">
-                  Go Back
-                </Button>
-              </Link>
             </ValidatorForm>
-          </Toolbar>
+            <Link to="/">
+              <Button variant="contained" color="secondary">
+                Go Back
+              </Button>
+            </Link>
+          </div>
         </AppBar>
-      </>
+      </div>
     );
   }
 }
 
-export default PaletteFormNav;
+export default withStyles(styles, { withTheme: true })(PaletteFormNav);

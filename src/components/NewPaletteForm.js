@@ -8,33 +8,14 @@ import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Button from '@material-ui/core/Button';
 import arrayMove from 'array-move';
+import drawerWidth from '../constants/cssConstants';
 import DraggableColorList from './DraggableColorList';
 import PaletteFormNav from './PaletteFormNav';
 import ColorPickerForm from './ColorPickerForm';
 
-const drawerWidth = 350;
-
 const styles = theme => ({
   root: {
     display: 'flex',
-  },
-  appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  menuButton: {
-    marginLeft: 12,
-    marginRight: 20,
   },
   hide: {
     display: 'none',
@@ -163,7 +144,6 @@ class NewPaletteForm extends Component {
       <div className={classes.root}>
         <PaletteFormNav
           handleSubmit={this.handleSubmit}
-          classes={classes}
           open={open}
           newPaletteName={newPaletteName}
           palettes={palettes}
