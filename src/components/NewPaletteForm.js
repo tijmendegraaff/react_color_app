@@ -144,7 +144,7 @@ class NewPaletteForm extends Component {
   }
 
   render() {
-    const { classes, palettes } = this.props;
+    const { classes } = this.props;
     const {
       open, currentColor, colors, newColorName, newPaletteName,
     } = this.state;
@@ -175,8 +175,8 @@ class NewPaletteForm extends Component {
                 value={newPaletteName}
                 name="newPaletteName"
                 label="Palette Name"
-                validators={['required', "isPaletteNameUnique"]}
-                errorMessages={['this field is required', "name already used"]}
+                validators={['required', 'isPaletteNameUnique']}
+                errorMessages={['this field is required', 'name already used']}
                 onChange={this.handleChange}
               />
               <Button variant="contained" color="primary" type="submit">
