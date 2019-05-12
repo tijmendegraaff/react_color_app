@@ -13,8 +13,8 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Button from '@material-ui/core/Button';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { ChromePicker } from 'react-color';
-
-import DraggableColorBox from './DraggableColorBox';
+import { arrayMove } from 'react-sortable-hoc';
+import DraggableColorList from './DraggableColorList';
 
 const drawerWidth = 350;
 
@@ -92,6 +92,7 @@ class NewPaletteForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.deleteColor = this.deleteColor.bind(this);
+    this.onSortEnd = this.onSortEnd.bind(this);
   }
 
   // TODO need to check eslint
@@ -110,11 +111,12 @@ class NewPaletteForm extends Component {
       ),
     );
   }
-  /* eslint-enable */
 
-  toggleDrawer() {
-    const { open } = this.state;
-    this.setState({ open: !open });
+  /* eslint-enable */
+  onSortEnd({ oldIndex, newIndex }) {
+    this.setState(({ colors }) => ({
+      colors: arrayMove(colors, oldIndex, newIndex),
+    }));
   }
 
   updateCurrentColor(newColor) {
@@ -137,6 +139,11 @@ class NewPaletteForm extends Component {
     this.setState({
       colors: colors.filter(color => color.name !== colorName),
     });
+  }
+
+  toggleDrawer() {
+    const { open } = this.state;
+    this.setState({ open: !open });
   }
 
   handleSubmit() {
@@ -246,14 +253,12 @@ class NewPaletteForm extends Component {
           })}
         >
           <div className={classes.drawerHeader} />
-          {colors.map(color => (
-            <DraggableColorBox
-              key={color.name}
-              color={color.color}
-              name={color.name}
-              deleteColor={this.deleteColor}
-            />
-          ))}
+          <DraggableColorList
+            axis="xy"
+            onSortEnd={this.onSortEnd}
+            colors={colors}
+            deleteColor={this.deleteColor}
+          />
         </main>
       </div>
     );
