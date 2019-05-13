@@ -12,7 +12,7 @@ class PaletteMetaForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      stage: '',
+      stage: 'nameForm',
       newPaletteName: '',
     };
     this.handleChange = this.handleChange.bind(this);
@@ -51,8 +51,13 @@ class PaletteMetaForm extends Component {
     const { newPaletteName, stage } = this.state;
     return (
       <>
-        <Dialog open={stage === 'emojiForm'}>
-          <Picker onSelect={this.savePalette} />
+        <Dialog
+          open={stage === 'emojiForm'}
+          onClose={toggleForm}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Choose a Palette Name</DialogTitle>
+          <Picker onSelect={this.savePalette} title="Pick and Emoji!" />
         </Dialog>
         <Dialog
           open={stage === 'nameForm'}
