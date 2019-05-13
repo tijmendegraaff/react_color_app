@@ -12,9 +12,12 @@ class PaletteMetaForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      stage: '',
       newPaletteName: '',
     };
     this.handleChange = this.handleChange.bind(this);
+    this.showEmojiPicker = this.showEmojiPicker.bind(this);
+    this.savePalette = this.savePalette.bind(this);
   }
 
   // TODO need to check eslint
@@ -32,17 +35,32 @@ class PaletteMetaForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  render() {
-    const { handleSubmit, toggleForm, open } = this.props;
+  showEmojiPicker() {
+    this.setState({ stage: 'emojiForm' });
+  }
+
+  savePalette(newEmoji) {
+    const { handleSubmit } = this.props;
     const { newPaletteName } = this.state;
+    const palette = { emoji: newEmoji.native, newPaletteName };
+    handleSubmit(palette);
+  }
+
+  render() {
+    const { toggleForm } = this.props;
+    const { newPaletteName, stage } = this.state;
     return (
       <>
-        <Dialog>
-          <Picker />
+        <Dialog open={stage === 'emojiForm'}>
+          <Picker onSelect={this.savePalette} />
         </Dialog>
-        <Dialog open={open} onClose={toggleForm} aria-labelledby="form-dialog-title">
+        <Dialog
+          open={stage === 'nameForm'}
+          onClose={toggleForm}
+          aria-labelledby="form-dialog-title"
+        >
           <DialogTitle id="form-dialog-title">Choose a Palette Name</DialogTitle>
-          <ValidatorForm onSubmit={() => handleSubmit(newPaletteName)}>
+          <ValidatorForm onSubmit={this.showEmojiPicker}>
             <DialogContent>
               <DialogContentText>
                 Please enter a new for your new Palette. Make sure it&apos;s unique

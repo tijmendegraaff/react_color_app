@@ -52,7 +52,7 @@ class PaletteFormNav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      formShowing: false,
+      open: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -72,7 +72,6 @@ class PaletteFormNav extends Component {
     const {
       open, classes, toggleDrawer, palettes, handleSubmit,
     } = this.props;
-    const { formShowing } = this.state;
     return (
       <div className={styles.root}>
         <CssBaseline />
@@ -112,14 +111,11 @@ class PaletteFormNav extends Component {
             </Button>
           </div>
         </AppBar>
-        {formShowing && (
-          <PaletteMetaForm
-            open={formShowing}
-            palettes={palettes}
-            handleSubmit={handleSubmit}
-            toggleForm={this.toggleForm}
-          />
-        )}
+        <PaletteMetaForm
+          palettes={palettes}
+          handleSubmit={handleSubmit}
+          toggleForm={this.toggleForm}
+        />
       </div>
     );
   }
