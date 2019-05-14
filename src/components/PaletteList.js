@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import MiniPalette from './MiniPalette';
+import MiniPalette from './MiniPalette/MiniPalette';
 
 class PaletteList extends Component {
   constructor(props) {
