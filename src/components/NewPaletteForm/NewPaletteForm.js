@@ -8,9 +8,9 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Button from '@material-ui/core/Button';
-import DraggableColorList from '../DraggableColorList';
-import PaletteFormNav from '../PaletteFormNav';
-import ColorPickerForm from '../ColorPickerForm';
+import DraggableColorList from '../DraggableColorList/DraggableColorList';
+import PaletteFormNav from '../PaletteFromNav/PaletteFormNav';
+import ColorPickerForm from '../ColorPickerForm/ColorPickerForm';
 import styles from './styles';
 
 class NewPaletteForm extends Component {
