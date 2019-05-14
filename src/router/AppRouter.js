@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import PaletteList from '../components/PaletteList';
-import NewPaletteForm from '../components/NewPaletteForm';
+import NewPaletteForm from '../components/NewPaletteForm/NewPaletteForm';
 import Palette from '../components/Palette';
 import SingleColorPalette from '../components/SingleColorPalette';
 import NotFoundPage from '../pages/NotFoundPage';
