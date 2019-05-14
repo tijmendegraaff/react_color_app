@@ -11,11 +11,13 @@ import generatePalette from '../helpers/colorHelpers';
 class AppRouter extends Component {
   constructor(props) {
     super(props);
+    const savedPalettes = JSON.parse(window.localStorage.getItem('palettes'));
     this.state = {
-      palettes: seedColors,
+      palettes: savedPalettes || seedColors,
     };
     this.savePalette = this.savePalette.bind(this);
     this.findPalette = this.findPalette.bind(this);
+    this.syncLocalStorage = this.syncLocalStorage.bind(this);
   }
 
   findPalette(id) {
@@ -23,9 +25,15 @@ class AppRouter extends Component {
     return generatePalette(palettes.find(palette => palette.id === id));
   }
 
-  savePalette(newPalette) {
+  async savePalette(newPalette) {
     const { palettes } = this.state;
-    this.setState({ palettes: [...palettes, newPalette] });
+    await this.setState({ palettes: [...palettes, newPalette] });
+    this.syncLocalStorage();
+  }
+
+  syncLocalStorage() {
+    const { palettes } = this.state;
+    window.localStorage.setItem('palettes', JSON.stringify(palettes));
   }
 
   render() {
