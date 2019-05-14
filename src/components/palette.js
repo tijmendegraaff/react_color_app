@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar';
-import ColorBox from './ColorBox';
+import ColorBox from './ColorBox/ColorBox';
 import Footer from './Footer';
 
 class Palette extends Component {
@@ -33,7 +33,7 @@ class Palette extends Component {
         name={color.name}
         colorId={color.id}
         paletteId={palette.id}
-        showLink
+        showingFullPalette
       />
     ));
     return (

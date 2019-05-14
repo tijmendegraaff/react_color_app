@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import ColorBox from './ColorBox';
+import ColorBox from './ColorBox/ColorBox';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
@@ -32,7 +32,12 @@ class SingleColorPalette extends Component {
     const { format } = this.state;
     const { palette } = this.props;
     const ColorBoxes = this._shades.map(color => (
-      <ColorBox key={color.name} name={color.name} background={color[format]} showLink={false} />
+      <ColorBox
+        key={color.name}
+        name={color.name}
+        background={color[format]}
+        showingFullPalette={false}
+      />
     ));
     return (
       <div className="single-color-palette palette">

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import chroma from 'chroma-js';
+import { withStyles } from '@material-ui/styles';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import styles from './styles';
 
 class colorBox extends Component {
   constructor(props) {
@@ -20,32 +22,31 @@ class colorBox extends Component {
 
   render() {
     const {
-      background, name, colorId, paletteId, showLink,
+      background, name, colorId, paletteId, showingFullPalette, classes,
     } = this.props;
     const { copied } = this.state;
 
-    const isDarkColor = chroma(background).luminance() <= 0.08;
     const isLightColor = chroma(background).luminance() >= 0.7;
 
     return (
       <CopyToClipboard text={background} onCopy={this.changeCopyState}>
-        <div style={{ background }} className="color-box">
+        <div style={{ background }} className={classes.colorBox}>
           <div style={{ background }} className={`copy-overlay ${copied && 'show'}`} />
           <div className={`copy-msg ${copied && 'show'}`}>
             <h1 className={isLightColor ? 'dark-text' : undefined}>Copied!</h1>
-            <p className={isLightColor ? 'dark-text' : undefined}>{background}</p>
+            <p className={classes.copyText}>{background}</p>
           </div>
           <div className="copy-container">
             <div className="box-content">
-              <span className={isDarkColor ? 'light-text' : undefined}>{name}</span>
+              <span className={classes.colorName}>{name}</span>
             </div>
-            <button className={`copy-button ${isLightColor && 'dark-text'}`} type="button">
+            <button className={classes.copyButton} type="button">
               Copy
             </button>
           </div>
-          {showLink && (
+          {showingFullPalette && (
             <Link to={`/palette/${paletteId}/${colorId}`} onClick={e => e.stopPropagation}>
-              <span className={`see-more ${isLightColor && 'dark-text'}`}>More</span>
+              <span className={classes.seeMore}>More</span>
             </Link>
           )}
         </div>
@@ -54,4 +55,4 @@ class colorBox extends Component {
   }
 }
 
-export default colorBox;
+export default withStyles(styles)(colorBox);
