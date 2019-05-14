@@ -18,6 +18,7 @@ class AppRouter extends Component {
     this.savePalette = this.savePalette.bind(this);
     this.findPalette = this.findPalette.bind(this);
     this.syncLocalStorage = this.syncLocalStorage.bind(this);
+    this.deletePalette = this.deletePalette.bind(this);
   }
 
   findPalette(id) {
@@ -31,6 +32,12 @@ class AppRouter extends Component {
     this.syncLocalStorage();
   }
 
+  deletePalette(id) {
+    const { palettes } = this.state;
+    const newPalettes = palettes.filter(palette => palette.id !== id);
+    this.setState({ palettes: newPalettes }, () => this.syncLocalStorage());
+  }
+
   syncLocalStorage() {
     const { palettes } = this.state;
     window.localStorage.setItem('palettes', JSON.stringify(palettes));
@@ -41,7 +48,11 @@ class AppRouter extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" render={() => <PaletteList palettes={palettes} />} />
+          <Route
+            exact
+            path="/"
+            render={() => <PaletteList palettes={palettes} deletePalette={this.deletePalette} />}
+          />
           <Route
             exact
             path="/palette/new"
