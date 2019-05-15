@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
-import MiniPalette from './MiniPalette/MiniPalette';
+import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/styles';
+import MiniPalette from '../MiniPalette/MiniPalette';
+import styles from './styles';
 
 class PaletteList extends Component {
   constructor(props) {
@@ -16,15 +18,15 @@ class PaletteList extends Component {
   }
 
   render() {
-    const { palettes, deletePalette } = this.props;
+    const { palettes, deletePalette, classes } = this.props;
     return (
-      <div className="palette-list-wrapper">
-        <div className="palette-list-container">
-          <nav className="palette-list-nav">
+      <div className={classes.paletteListWrapper}>
+        <div className={classes.paletteListContainer}>
+          <nav className={classes.paletteListNav}>
             <h1>React Colors</h1>
             <Link to="/palette/new">Create Palette</Link>
           </nav>
-          <div className="palette-list-palettes-container">
+          <div className={classes.paletteListPalettesContainer}>
             {palettes.map(palette => (
               <MiniPalette
                 deletePalette={deletePalette}
@@ -41,4 +43,4 @@ class PaletteList extends Component {
   }
 }
 
-export default withRouter(PaletteList);
+export default withStyles(styles)(PaletteList);

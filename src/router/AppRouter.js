@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
-import PaletteList from '../components/PaletteList';
+import PaletteList from '../components/PaletteList/PaletteList';
 import NewPaletteForm from '../components/NewPaletteForm/NewPaletteForm';
 import Palette from '../components/Palette/Palette';
 import SingleColorPalette from '../components/SingleColorPalette/SingleColorPalette';
@@ -51,7 +51,9 @@ class AppRouter extends Component {
           <Route
             exact
             path="/"
-            render={() => <PaletteList palettes={palettes} deletePalette={this.deletePalette} />}
+            render={routeProps => (
+              <PaletteList palettes={palettes} deletePalette={this.deletePalette} {...routeProps} />
+            )}
           />
           <Route
             exact
