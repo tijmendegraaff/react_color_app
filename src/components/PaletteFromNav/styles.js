@@ -1,4 +1,4 @@
-import { drawerWidth } from '../../constants/cssConstants';
+import { drawerWidth, breakPoint } from '../../constants/cssConstants';
 
 const styles = theme => ({
   root: {
@@ -34,9 +34,16 @@ const styles = theme => ({
     '& a': {
       textDecoration: 'none',
     },
+    [breakPoint.down('xs')]: {
+      marginRight: '0.5rem',
+    },
   },
   button: {
     margin: '0 0.5rem',
+    [breakPoint.down('xs')]: {
+      margin: '0 0.2rem',
+      padding: '0.2rem',
+    },
   },
 });
 

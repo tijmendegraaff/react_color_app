@@ -1,8 +1,29 @@
+import { breakPoint } from '../../constants/cssConstants';
+
 const styles = {
   slider: {
     width: '340px',
     margin: '0 10px',
     display: 'inline-block',
+    '& .rc-slider-track': {
+      backgroundColor: 'transparent',
+    },
+    '& .rc-slider-rail': {
+      height: '8px',
+    },
+    '& .rc-slider-handle, .rc-slider-handle:active, .rc-slider-handle:focus,.rc-slider-handle:hover': {
+      backgroundColor: 'green',
+      outline: 'none',
+      border: '2px solid green',
+      boxShadow: 'none',
+      width: '13px',
+      height: '13px',
+      marginLeft: '-7px',
+      marginTop: '-3px',
+    },
+    [breakPoint.down('md')]: {
+      width: '150px',
+    },
   },
   navbar: {
     display: 'flex',
@@ -22,46 +43,14 @@ const styles = {
       textDecoration: 'none',
       color: 'black',
     },
-    '& .rc-slider-track': {
-      backgroundColor: 'transparent',
-    },
-    '& .rc-slider-rail': {
-      height: '8px',
-    },
-    '& .rc-slider-handle, .rc-slider-handle:active, .rc-slider-handle:focus,.rc-slider-handle:hover': {
-      backgroundColor: 'green',
-      outline: 'none',
-      border: '2px solid green',
-      boxShadow: 'none',
-      width: '13px',
-      height: '13px',
-      marginLeft: '-7px',
-      marginTop: '-3px',
+    [breakPoint.down('xs')]: {
+      display: 'none',
     },
   },
   selectContainer: {
     marginLeft: 'auto',
     marginRight: '1rem',
   },
-  // .rc-slider-track {
-  //   background-color: transparent;
-  // }
-  // .rc-slider-rail {
-  //   height: 8px;
-  // }
-  // .rc-slider-handle,
-  // .rc-slider-handle:active,
-  // .rc-slider-handle:focus,
-  // .rc-slider-handle:hover {
-  //   background-color: green;
-  //   outline: none;
-  //   border: 2px solid green;
-  //   box-shadow: none;
-  //   width: 13px;
-  //   height: 13px;
-  //   margin-left: -7px;
-  //   margin-top: -3px;
-  // }
 };
 
 export default styles;
