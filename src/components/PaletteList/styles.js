@@ -1,12 +1,17 @@
 import { breakPoint } from '../../constants/cssConstants';
+import bg from '../../assets/images/backgroundImage.svg';
 
 const styles = {
   paletteListWrapper: {
-    backgroundColor: 'blue',
+    backgroundColor: '#4e81aa',
+    backgroundImage: `url(${bg})`,
+    /* background by SVGBackgrounds.com */
     height: '100vh',
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'center',
+    backgroundAttachment: 'fixed',
+    overflow: 'scroll',
   },
   paletteListContainer: {
     width: '50%',
@@ -42,8 +47,11 @@ const styles = {
     },
     [breakPoint.down('xs')]: {
       gridTemplateColumns: 'repeat(1, 100%)',
-      gridGap: '1rem',
+      gridGap: '1.4rem',
     },
+  },
+  header: {
+    fontSize: '2rem',
   },
 };
 
