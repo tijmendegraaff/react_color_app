@@ -1,3 +1,5 @@
+import { breakPoint } from '../../constants/cssConstants';
+
 const styles = {
   palette: {
     height: '100vh',
@@ -34,6 +36,18 @@ const styles = {
       textTransform: 'uppercase',
       border: 'none',
       textDecoration: 'none',
+    },
+    [breakPoint.down('lg')]: {
+      height: '33.3333%',
+      width: '50%',
+    },
+    [breakPoint.down('md')]: {
+      height: '20%',
+      width: '50%',
+    },
+    [breakPoint.down('xs')]: {
+      height: '10%',
+      width: '100%',
     },
   },
 };
