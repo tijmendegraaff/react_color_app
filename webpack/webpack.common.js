@@ -54,6 +54,7 @@ module.exports = {
       filename: './index.html',
       hash: true,
       inject: false,
+      favicon: './src/assets/favicon.png',
     }),
     new MiniCssExtractPlugin({
       filename: 'style.[contenthash].css',
