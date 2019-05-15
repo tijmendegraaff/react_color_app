@@ -1,4 +1,4 @@
-import drawerWidth from '../../constants/cssConstants';
+import { drawerWidth } from '../../constants/cssConstants';
 
 const styles = theme => ({
   root: {

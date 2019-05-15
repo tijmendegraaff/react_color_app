@@ -1,3 +1,14 @@
-const drawerWidth = 400;
+export const drawerWidth = 400;
 
-export default drawerWidth;
+export const breakPoint = {
+  up() {},
+  down(size) {
+    const sizes = {
+      xs: '575.98px',
+      sm: '767.98px',
+      md: '991.98px',
+      lg: '1199.98px',
+    };
+    return `@media (max-width: ${sizes[size]})`;
+  },
+};
