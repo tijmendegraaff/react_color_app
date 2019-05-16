@@ -7,5 +7,3 @@ cache:
 script:
   - yarn test
   - yarn build:prod
-on:
-  branch: master
