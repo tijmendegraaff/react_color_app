@@ -10,9 +10,9 @@ class MiniPalette extends Component {
   }
 
   handleDelete(e) {
-    const { deletePalette, id } = this.props;
+    const { id, handleDelete } = this.props;
     e.stopPropagation();
-    deletePalette(id);
+    handleDelete(id);
   }
 
   render() {
