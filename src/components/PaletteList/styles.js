@@ -2,6 +2,15 @@ import { breakPoint } from '../../constants/cssConstants';
 import bg from '../../assets/images/backgroundImage.svg';
 
 const styles = {
+  '@global': {
+    '.fade-exit': {
+      opacity: 1,
+    },
+    '.fade-exit-active': {
+      opacity: 0,
+      transition: 'opacity 300ms ease-in-out',
+    },
+  },
   paletteListWrapper: {
     backgroundColor: '#4e81aa',
     backgroundImage: `url(${bg})`,
