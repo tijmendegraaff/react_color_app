@@ -1,13 +1,31 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Dialog from '@material-ui/core/Dialog';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemText from '@material-ui/core/ListItemText';
+import CheckIcon from '@material-ui/icons/Check';
+import CloseIcon from '@material-ui/icons/Close';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import blue from '@material-ui/core/colors/blue';
+import red from '@material-ui/core/colors/red';
 import { withStyles } from '@material-ui/styles';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { Avatar } from '@material-ui/core';
 import MiniPalette from '../MiniPalette/MiniPalette';
 import styles from './styles';
 
 class PaletteList extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      openDeleteDialog: false,
+      deletingId: '',
+    };
     this.navigateToPalette = this.navigateToPalette.bind(this);
+    this.toggleDeleteDialog = this.toggleDeleteDialog.bind(this);
+    this.handleDeletePalette = this.handleDeletePalette.bind(this);
   }
 
   navigateToPalette(id) {
@@ -17,8 +35,21 @@ class PaletteList extends Component {
     push(`/palette/${id}`);
   }
 
+  toggleDeleteDialog(id) {
+    const { openDeleteDialog } = this.state;
+    this.setState({ openDeleteDialog: !openDeleteDialog, deletingId: id });
+  }
+
+  handleDeletePalette() {
+    const { deletingId } = this.state;
+    const { deletePalette } = this.props;
+    deletePalette(deletingId);
+    this.toggleDeleteDialog('');
+  }
+
   render() {
-    const { palettes, deletePalette, classes } = this.props;
+    const { palettes, classes } = this.props;
+    const { openDeleteDialog } = this.state;
     return (
       <div className={classes.paletteListWrapper}>
         <div className={classes.paletteListContainer}>
@@ -26,18 +57,47 @@ class PaletteList extends Component {
             <h1 className={classes.header}>React Colors</h1>
             <Link to="/palette/new">Create Palette</Link>
           </nav>
-          <div className={classes.paletteListPalettesContainer}>
+          <TransitionGroup className={classes.paletteListPalettesContainer}>
             {palettes.map(palette => (
-              <MiniPalette
-                deletePalette={deletePalette}
-                key={palette.id}
-                id={palette.id}
-                {...palette}
-                handleClick={() => this.navigateToPalette(palette.id)}
-              />
+              <CSSTransition key={palette.id} classNames="fade" timeout={300}>
+                <MiniPalette
+                  handleDelete={this.toggleDeleteDialog}
+                  key={palette.id}
+                  id={palette.id}
+                  {...palette}
+                  handleClick={() => this.navigateToPalette(palette.id)}
+                />
+              </CSSTransition>
             ))}
-          </div>
+          </TransitionGroup>
         </div>
+        {openDeleteDialog && (
+          <Dialog
+            open={openDeleteDialog}
+            aria-labelledby="delete-dialog-title"
+            onClose={this.toggleDeleteDialog}
+          >
+            <DialogTitle id="delete-dialog-title">Delete this palette</DialogTitle>
+            <List>
+              <ListItem button onClick={this.handleDeletePalette}>
+                <ListItemAvatar>
+                  <Avatar style={{ backgroundColor: blue[100], color: blue[600] }}>
+                    <CheckIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary="Delete" />
+              </ListItem>
+              <ListItem button onClick={this.toggleDeleteDialog}>
+                <ListItemAvatar>
+                  <Avatar style={{ backgroundColor: red[100], color: red[600] }}>
+                    <CloseIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary="Cancel" />
+              </ListItem>
+            </List>
+          </Dialog>
+        )}
       </div>
     );
   }
