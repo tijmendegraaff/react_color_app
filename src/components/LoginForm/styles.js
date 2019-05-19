@@ -20,10 +20,23 @@ const styles = {
     marginLeft: '5rem',
     backgroundColor: 'white',
     width: '50%',
-    height: '70vh',
+    height: '80vh',
     display: 'flex',
     flexDirection: 'column',
     position: 'relative',
+    borderRadius: '5px',
+  },
+  title: {
+    alignSelf: 'center',
+    margin: '2rem 0',
+  },
+  submitButtonContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  submitButton: {
+    margin: '2rem',
+    justifySelf: 'center',
   },
   buttonContainer: {
     position: 'absolute',
