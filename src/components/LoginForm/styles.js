@@ -20,10 +20,37 @@ const styles = {
     marginLeft: '5rem',
     backgroundColor: 'white',
     width: '50%',
-    height: '70vh',
+    height: '80vh',
     display: 'flex',
     flexDirection: 'column',
     position: 'relative',
+    borderRadius: '5px',
+  },
+  title: {
+    alignSelf: 'center',
+    margin: '2rem 0',
+  },
+  inputContainer: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  formLabel: {
+    // width: '100%',
+    // justifySelf: 'center',
+    marginLeft: '2rem',
+  },
+  formInput: {
+    margin: '0 2rem',
+  },
+  submitButtonContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  submitButton: {
+    margin: '2rem',
+    justifySelf: 'center',
   },
   buttonContainer: {
     position: 'absolute',
