@@ -6,8 +6,6 @@ const styles = {
     justifyContent: 'space-between',
   },
   formLabel: {
-    // width: '100%',
-    // justifySelf: 'center',
     marginLeft: '2rem',
     textTransform: 'capitalize',
   },

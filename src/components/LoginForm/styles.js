@@ -30,20 +30,6 @@ const styles = {
     alignSelf: 'center',
     margin: '2rem 0',
   },
-  inputContainer: {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-  },
-  formLabel: {
-    // width: '100%',
-    // justifySelf: 'center',
-    marginLeft: '2rem',
-  },
-  formInput: {
-    margin: '0 2rem',
-  },
   submitButtonContainer: {
     display: 'flex',
     justifyContent: 'center',
