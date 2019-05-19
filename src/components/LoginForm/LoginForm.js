@@ -82,7 +82,6 @@ class LoginForm extends Component {
                 {loginState ? (
                   <>
                     <h3 className={classes.title}>Login Page</h3>
-                    <p>{process.env.API_URL}</p>
                     <form
                       onSubmit={(e) => {
                         e.preventDefault();
