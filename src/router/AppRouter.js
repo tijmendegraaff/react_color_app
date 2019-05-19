@@ -4,6 +4,7 @@ import PaletteList from '../components/PaletteList/PaletteList';
 import NewPaletteForm from '../components/NewPaletteForm/NewPaletteForm';
 import Palette from '../components/Palette/Palette';
 import SingleColorPalette from '../components/SingleColorPalette/SingleColorPalette';
+import LoginForm from '../components/LoginForm/LoginForm';
 import NotFoundPage from '../pages/NotFoundPage';
 import seedColors from '../constants/seedColors';
 import generatePalette from '../helpers/colorHelpers';
@@ -55,6 +56,7 @@ class AppRouter extends Component {
               <PaletteList palettes={palettes} deletePalette={this.deletePalette} {...routeProps} />
             )}
           />
+          <Route exact path="/login" render={routeProps => <LoginForm {...routeProps} />} />
           <Route
             exact
             path="/palette/new"
