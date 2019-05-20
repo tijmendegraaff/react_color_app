@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import PrivateRoute from './PrivateRoute';
 import PaletteList from '../components/PaletteList/PaletteList';
 import NewPaletteForm from '../components/NewPaletteForm/NewPaletteForm';
 import Palette from '../components/Palette/Palette';
@@ -49,7 +50,7 @@ class AppRouter extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route
+          <PrivateRoute
             exact
             path="/"
             render={routeProps => (
@@ -57,21 +58,21 @@ class AppRouter extends Component {
             )}
           />
           <Route exact path="/login" render={routeProps => <LoginForm {...routeProps} />} />
-          <Route
+          <PrivateRoute
             exact
             path="/palette/new"
             render={routeProps => (
               <NewPaletteForm palettes={palettes} savePalette={this.savePalette} {...routeProps} />
             )}
           />
-          <Route
+          <PrivateRoute
             exact
             path="/palette/:id"
             render={routeProps => (
               <Palette palette={this.findPalette(routeProps.match.params.id)} />
             )}
           />
-          <Route
+          <PrivateRoute
             exact
             path="/palette/:paletteId/:colorId"
             render={routeProps => (
