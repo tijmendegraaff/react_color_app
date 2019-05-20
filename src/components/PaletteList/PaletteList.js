@@ -15,6 +15,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { Avatar } from '@material-ui/core';
 import MiniPalette from '../MiniPalette/MiniPalette';
 import styles from './styles';
+import { AUTH_TOKEN } from '../../constants/constants';
 
 class PaletteList extends Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class PaletteList extends Component {
     this.navigateToPalette = this.navigateToPalette.bind(this);
     this.toggleDeleteDialog = this.toggleDeleteDialog.bind(this);
     this.handleDeletePalette = this.handleDeletePalette.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   navigateToPalette(id) {
@@ -47,6 +49,14 @@ class PaletteList extends Component {
     this.toggleDeleteDialog('');
   }
 
+  async handleLogout() {
+    await localStorage.removeItem(AUTH_TOKEN);
+    const {
+      history: { push },
+    } = this.props;
+    push('/login');
+  }
+
   render() {
     const { palettes, classes } = this.props;
     const { openDeleteDialog } = this.state;
@@ -55,7 +65,12 @@ class PaletteList extends Component {
         <div className={classes.paletteListContainer}>
           <nav className={classes.paletteListNav}>
             <h1 className={classes.header}>React Colors</h1>
-            <Link to="/palette/new">Create Palette</Link>
+            <Link to="/palette/new" className={classes.createPaletteLink}>
+              Create Palette
+            </Link>
+            <button type="button" className={classes.logoutButton} onClick={this.handleLogout}>
+              Logout
+            </button>
           </nav>
           <TransitionGroup className={classes.paletteListPalettesContainer}>
             {palettes.map(palette => (

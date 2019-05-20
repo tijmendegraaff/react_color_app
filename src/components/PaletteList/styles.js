@@ -38,12 +38,20 @@ const styles = {
   paletteListNav: {
     display: 'flex',
     width: '100%',
-    justifyContent: 'space-between',
     color: 'white',
     alignItems: 'center',
     '& a': {
       color: 'white',
     },
+    position: 'relative',
+  },
+  logoutButton: {
+    position: 'absolute',
+    right: '0',
+  },
+  createPaletteLink: {
+    position: 'absolute',
+    right: '150px',
   },
   paletteListPalettesContainer: {
     boxSizing: 'border-box',
