@@ -5,7 +5,7 @@ const levels = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 
 function generatePalette(starterPalette) {
   let newPalette = {
-    paletteName: starterPalette.paletteName,
+    name: starterPalette.name,
     id: starterPalette.id,
     emoji: starterPalette.emoji,
     colors: {},
@@ -14,7 +14,7 @@ function generatePalette(starterPalette) {
     newPalette.colors[level] = [];
   }
   for (let color of starterPalette.colors) {
-    let scale = getScale(color.color, 10).reverse();
+    let scale = getScale(color.colorCode, 10).reverse();
     for (let i in scale) {
       newPalette.colors[levels[i]].push({
         name: `${color.name} ${levels[i]}`,
