@@ -17,14 +17,13 @@ class MiniPalette extends Component {
 
   render() {
     const {
-      paletteName, emoji, colors, handleClick, classes,
+      name, emoji, colors, handleClick, classes,
     } = this.props;
-
     const miniColorBoxes = colors.map(color => (
       <div
-        key={color.name}
+        key={color.id}
         className={classes.miniPaletteColorBox}
-        style={{ backgroundColor: color.color }}
+        style={{ backgroundColor: color.colorCode }}
       />
     ));
 
@@ -39,7 +38,7 @@ class MiniPalette extends Component {
         <DeleteIcon className={classes.deleteIcon} onClick={this.handleDelete} />
         <div className={classes.miniPaletteColors}>{miniColorBoxes}</div>
         <h5 className={classes.miniPaletteTitle}>
-          {paletteName}
+          {name}
           <span className={classes.miniPaletteEmoji}>{emoji}</span>
         </h5>
       </div>
