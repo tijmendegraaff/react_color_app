@@ -54,7 +54,7 @@ class AppRouter extends Component {
             exact
             path="/"
             render={routeProps => (
-              <PaletteList palettes={palettes} deletePalette={this.deletePalette} {...routeProps} />
+              <PaletteList deletePalette={this.deletePalette} {...routeProps} />
             )}
           />
           <Route exact path="/login" render={routeProps => <LoginForm {...routeProps} />} />
@@ -68,9 +68,7 @@ class AppRouter extends Component {
           <PrivateRoute
             exact
             path="/palette/:id"
-            render={routeProps => (
-              <Palette palette={this.findPalette(routeProps.match.params.id)} />
-            )}
+            render={routeProps => <Palette {...routeProps} />}
           />
           <PrivateRoute
             exact
