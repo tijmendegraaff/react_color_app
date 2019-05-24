@@ -76,7 +76,7 @@ class AppRouter extends Component {
             render={routeProps => (
               <SingleColorPalette
                 colorId={routeProps.match.params.colorId}
-                palette={this.findPalette(routeProps.match.params.paletteId)}
+                paletteId={routeProps.match.params.paletteId}
               />
             )}
           />
