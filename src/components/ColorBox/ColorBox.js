@@ -21,7 +21,6 @@ class colorBox extends Component {
   }
 
   render() {
-    console.log(this.props);
     const {
       background, name, colorId, paletteId, showingFullPalette, classes,
     } = this.props;
